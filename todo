@@ -1,0 +1,25 @@
+requests of api:
+    
+    SIGNUP
+        POST 
+
+    LOGIN
+        POST 
+    
+    USER
+        GET
+
+    INCOMES
+        POST
+        PUT
+        
+
+    OUTCOMES
+        POST 
+        PUT
+
+
+    PROJECTIONS
+        POST
+        PUT
+
