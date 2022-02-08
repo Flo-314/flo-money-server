@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-const e = require('connect-flash');
 const User = require('../models/user');
 
 exports.user = async (req, res) => {
