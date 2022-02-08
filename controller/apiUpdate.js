@@ -10,8 +10,10 @@ exports.category = async (req, res) => {
 };
 exports.payment = async (req, res) => {
   const { ammount, toFrom, isMonthly, _id } = req.body;
-  let payment = await Payment.findById({ _id });
-  payment = { ammount, toFrom, isMonthly };
+  const payment = await Payment.findById({ _id });
+  payment.ammount = ammount;
+  payment.toFrom = toFrom;
+  payment.isMonthly = isMonthly;
   await payment.save();
   res.json({ msg: 'payment name edited' });
 };
