@@ -10,16 +10,31 @@ requests of api:
         GET
 
     INCOMES
-        POST
-        PUT
-        
+        CATEGORIES
+         POST 
+         PUT
+         DELETE
+            PAYMENTS
+                POST 
+                PUT
+                DELETE
+
+   
 
     OUTCOMES
-        POST 
-        PUT
+        CATEGORIES
+         POST 
+         PUT
+         DELETE
+            PAYMENTS
+                POST 
+                PUT
+                DELETE
 
 
     PROJECTIONS
-        POST
-        PUT
+        PAYMENT
+            POST
+            PUT 
+            DELETE
 
