@@ -8,7 +8,7 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   income: [{ type: Schema.Types.ObjectId, ref: 'category', required: true }],
   outcome: [{ type: Schema.Types.ObjectId, ref: 'category', required: true }],
-  projections: [{ type: Schema.Types.ObjectId, ref: 'payment' }],
+  projections: { type: Schema.Types.ObjectId, ref: 'category' },
   username: { type: String, required: true },
 });
 

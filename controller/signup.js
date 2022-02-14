@@ -9,8 +9,8 @@ const Category = require('../models/category');
 require('dotenv').config();
 
 exports.post = [
-  body('name', 'MIN FULL NAME LENGTH IS 4.').trim().isLength({ max: 50, min: 4 }).escape(),
-  body('email', 'PLEASE INTRODUCE A VALID EMAIL').trim().isLength({ max: 50, min: 5 }).escape(),
+  body('fullname', 'MIN FULL NAME LENGTH IS 4.').trim().isLength({ max: 50, min: 2 }).escape(),
+  body('email', 'PLEASE INTRODUCE A VALID EMAIL').trim().isLength({ max: 500, min: 5 }).escape(),
   body('username', 'MIN USERNAME LENGTH IS 4').trim().isLength({ max: 50, min: 4 }).escape(),
   body('password', 'MIN PASSWORD LENGTH IS 8').trim().isLength({ max: 50, min: 8 }).escape(),
   body('confpassword', 'password Confirmation field must have the same value as the password field')
@@ -28,28 +28,31 @@ exports.post = [
         const password = bcrypt.hashSync(req.body.password, salt);
 
         // basic template of new user
-        const payment1 = new Payment({ ammount: 200, toFrom: 'b', isMontly: false });
+        const payment1 = new Payment({ ammount: 200, toFrom: 'b', isMonthly: false });
         await payment1.save();
-        const payment2 = new Payment({ ammount: 2000, toFrom: 'c', isMontly: false });
+        const payment2 = new Payment({ ammount: 2000, toFrom: 'c', isMonthly: false });
         await payment2.save();
 
-        const payment3 = new Payment({ ammount: 2000, toFrom: 'a', isMontly: false });
+        const payment3 = new Payment({ ammount: 2000, toFrom: 'a', isMonthly: false });
         await payment3.save();
 
-        const category1 = new Category({ name: 'example category', payments: [{ _id: payment1._id }] });
+        const category1 = new Category({ name: 'example category', payments: [{ _id: payment1._id }], color: 'red' });
         await category1.save();
 
-        const category2 = new Category({ name: 'example category', payments: [{ _id: payment2._id }] });
+        const category2 = new Category({ name: 'example category', payments: [{ _id: payment2._id }], color: 'blue' });
         await category2.save();
 
+        const category3 = new Category({ name: 'projections', payments: [{ _id: payment3._id }], color: 'green' });
+        await category3.save();
+
         const newUser = new User({
-          name: req.body.name,
+          name: req.body.fullname,
           email: req.body.email,
           username: req.body.username,
           password,
           income: [{ _id: category1._id }],
           outcome: [{ _id: category2._id }],
-          projections: [{ _id: payment3._id }],
+          projections: { _id: category3._id },
         });
 
         await newUser.save((err) => {
