@@ -28,18 +28,28 @@ exports.post = [
         const password = bcrypt.hashSync(req.body.password, salt);
 
         // basic template of new user
-        const payment1 = new Payment({ ammount: 200, toFrom: 'b', isMonthly: false });
+        const payment1 = new Payment({ ammount: 200, name: 'b', isMonthly: false, date: new Date(), isIncome: true });
         await payment1.save();
-        const payment2 = new Payment({ ammount: 2000, toFrom: 'c', isMonthly: false });
+        const payment2 = new Payment({ ammount: 2000, name: 'c', isMonthly: false, date: new Date(), isIncome: false });
         await payment2.save();
 
-        const payment3 = new Payment({ ammount: 2000, toFrom: 'a', isMonthly: false });
+        const payment3 = new Payment({ ammount: 2000, name: 'a', isMonthly: false, date: new Date(), isIncome: true });
         await payment3.save();
 
-        const category1 = new Category({ name: 'example category', payments: [{ _id: payment1._id }], color: 'red' });
+        const category1 = new Category({
+          isIncome: true,
+          name: 'Trabajo',
+          payments: [{ _id: payment1._id }],
+          color: 'red',
+        });
         await category1.save();
 
-        const category2 = new Category({ name: 'example category', payments: [{ _id: payment2._id }], color: 'blue' });
+        const category2 = new Category({
+          isIncome: false,
+          name: 'Servicios',
+          payments: [{ _id: payment2._id }],
+          color: 'blue',
+        });
         await category2.save();
 
         const category3 = new Category({ name: 'projections', payments: [{ _id: payment3._id }], color: 'green' });

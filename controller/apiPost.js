@@ -7,9 +7,10 @@ const User = require('../models/user');
 const Payment = require('../models/payment');
 
 exports.category = async (req, res) => {
-  const { name, _id, target } = req.body;
+  console.log(req.body);
+  const { name, _id, target, color, isIncome } = req.body;
   // crea nueva categoria
-  const newCategory = await new Category({ name });
+  const newCategory = await new Category({ name, color, isIncome });
   await newCategory.save();
 
   const user = await User.findById({ _id });
@@ -20,13 +21,17 @@ exports.category = async (req, res) => {
 };
 
 exports.payment = async (req, res) => {
-  const { ammount, toFrom, isMonthly, _id } = req.body;
+  const { ammount, name, isMonthly, _id, isIncome } = req.body;
+  let { date } = req.body;
   // crea nueva categoria
+  if (!date) {
+    date = new Date();
+  }
+  const user = await Category.findById({ _id });
 
-  const newPayment = await new Payment({ ammount, toFrom, isMonthly });
+  const newPayment = await new Payment({ ammount, name, isMonthly, date, isIncome });
   await newPayment.save();
 
-  const user = await Category.findById({ _id });
   // busca donde poner categoria, income outcome.
   user.payments.push(newPayment._id);
   await user.save();
@@ -35,7 +40,7 @@ exports.payment = async (req, res) => {
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
-
+  console.log(user);
   if (user !== null) {
     if (bcrypt.compareSync(password, user.password) === true) {
       const opts = {};
