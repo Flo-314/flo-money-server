@@ -19,6 +19,7 @@ exports.post = [
 
   async (req, res, next) => {
     const errors = validationResult(req);
+    console.log(req.body);
     if (errors.isEmpty()) {
       const userUsername = await User.find({ username: req.body.username });
       const userEmail = await User.find({ email: req.body.email });
@@ -40,7 +41,7 @@ exports.post = [
           isIncome: true,
           name: 'Trabajo',
           payments: [{ _id: payment1._id }],
-          color: 'red',
+          color: '#ffffff',
         });
         await category1.save();
 
@@ -48,13 +49,26 @@ exports.post = [
           isIncome: false,
           name: 'Servicios',
           payments: [{ _id: payment2._id }],
-          color: 'blue',
+          color: '#ffffff',
         });
         await category2.save();
 
-        const category3 = new Category({ name: 'projections', payments: [{ _id: payment3._id }], color: 'green' });
-        await category3.save();
+        const category3 = new Category({
+          isIncome: true,
 
+          name: 'projected income',
+          payments: [{ _id: payment3._id }],
+          color: '#ffffff',
+        });
+        await category3.save();
+        const category4 = new Category({
+          isIncome: false,
+
+          name: 'projected outcome',
+          payments: [],
+          color: '#ffffff',
+        });
+        await category4.save();
         const newUser = new User({
           name: req.body.fullname,
           email: req.body.email,
@@ -62,7 +76,7 @@ exports.post = [
           password,
           income: [{ _id: category1._id }],
           outcome: [{ _id: category2._id }],
-          projections: { _id: category3._id },
+          projections: [{ _id: category3._id }, { _id: category4._id }],
         });
 
         await newUser.save((err) => {
