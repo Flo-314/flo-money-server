@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const Category = require('../models/category');
 const User = require('../models/user');
 const Payment = require('../models/payment');
+const { body, validationResult } = require('express-validator');
 
 exports.category = 
   async (req, res) => {

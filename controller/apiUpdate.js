@@ -1,5 +1,6 @@
 const Category = require('../models/category');
 const Payment = require('../models/payment');
+const { body, validationResult } = require('express-validator');
 
 exports.category = async (req, res) => {
   const { name, _id, color } = req.body;
