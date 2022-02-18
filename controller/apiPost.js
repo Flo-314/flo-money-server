@@ -6,7 +6,8 @@ const Category = require('../models/category');
 const User = require('../models/user');
 const Payment = require('../models/payment');
 
-exports.category = async (req, res) => {
+exports.category = 
+  async (req, res) => {
   console.log(req.body);
   const { name, _id, target, color, isIncome } = req.body;
   // crea nueva categoria
@@ -20,7 +21,16 @@ exports.category = async (req, res) => {
   res.json({ msg: 'category created' });
 };
 
-exports.payment = async (req, res) => {
+exports.payment = [
+  
+    body('ammount', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+    body('name', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+    body('isMonthly', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+    body('_id', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+  
+
+  
+  async (req, res) => {
   const { ammount, name, isMonthly, _id, isIncome } = req.body;
   let { date } = req.body;
   // crea nueva categoria
@@ -36,7 +46,7 @@ exports.payment = async (req, res) => {
   user.payments.push(newPayment._id);
   await user.save();
   res.json({ msg: 'payment created' });
-};
+}]
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
