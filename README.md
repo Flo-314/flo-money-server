@@ -1,5 +1,7 @@
 # flo-money-frontend
 Money Managament App.
+(Made with React, React-Router, Chakra-UI, Express/Node.js, mongoDB)
+
 Flo Money makes managing personal ﬁnances more easy; The user can record
 personal ﬁnancial transactions, view reports and project ﬁnances
 ![.](https://github.com/Flo-314/flo-money-frontend/blob/main/imagesGithub/1.png)
