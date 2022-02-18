@@ -9,7 +9,9 @@ exports.category = async (req, res) => {
   await category.save();
   res.json({ msg: 'category name edited' });
 };
-exports.payment = [   body('ammount', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+exports.payment = [  
+  
+body('ammount', 'mucho texto').trim().isLength({ max: 50, min: 1 }).escape(),
 body('name', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
 body('isMonthly', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
 body('_id', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
