@@ -29,13 +29,16 @@ exports.post = [
         const password = bcrypt.hashSync(req.body.password, salt);
 
         // basic template of new user
-        const payment1 = new Payment({ ammount: 200, name: 'b', isMonthly: false, date: new Date(), isIncome: true });
+        const payment1 = new Payment({ ammount: 200, name: 'Ejemplo de ingreso', isMonthly: false, date: new Date(), isIncome: true });
         await payment1.save();
-        const payment2 = new Payment({ ammount: 2000, name: 'c', isMonthly: false, date: new Date(), isIncome: false });
+        const payment2 = new Payment({ ammount: 2000, name: 'Ejemplo de Egreso', isMonthly: false, date: new Date(), isIncome: false });
         await payment2.save();
 
-        const payment3 = new Payment({ ammount: 2000, name: 'a', isMonthly: false, date: new Date(), isIncome: true });
+        const payment3 = new Payment({ ammount: 2000, name: 'ingreso de proyección', isMonthly: false, date: new Date(), isIncome: true });
         await payment3.save();
+
+        const payment4 = new Payment({ ammount: 10000, name: 'egreso de proyección', isMonthly: false, date: new Date(), isIncome: true });
+        await payment4.save();
 
         const category1 = new Category({
           isIncome: true,
@@ -65,7 +68,7 @@ exports.post = [
           isIncome: false,
 
           name: 'projected outcome',
-          payments: [],
+          payments: [{ _id: payment4._id }],
           color: '#ffffff',
         });
         await category4.save();
