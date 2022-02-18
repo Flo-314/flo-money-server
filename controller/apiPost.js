@@ -27,7 +27,6 @@ exports.payment = [
     body('name', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
     body('isMonthly', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
     body('_id', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
-  
 
   
   async (req, res) => {

@@ -9,7 +9,11 @@ exports.category = async (req, res) => {
   await category.save();
   res.json({ msg: 'category name edited' });
 };
-exports.payment = async (req, res) => {
+exports.payment = [   body('ammount', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+body('name', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+body('isMonthly', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+body('_id', 'muchotexto').trim().isLength({ max: 50, min: 1 }).escape(),
+async (req, res) => {
   const { ammount, name, isMonthly, _id } = req.body;
   console.log(req.body);
 
@@ -19,4 +23,4 @@ exports.payment = async (req, res) => {
   payment.isMonthly = isMonthly;
   await payment.save();
   res.json({ msg: 'payment name edited' });
-};
+}]
