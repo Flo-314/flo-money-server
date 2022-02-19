@@ -29,7 +29,7 @@ exports.post = [
         const password = bcrypt.hashSync(req.body.password, salt);
 
         // basic template of new user
-        const payment1 = new Payment({ ammount: 200, name: 'Ejemplo de ingreso', isMonthly: false, date: new Date(), isIncome: true });
+        const payment1 = new Payment({ ammount: 2000, name: 'Ejemplo de ingreso', isMonthly: false, date: new Date(), isIncome: true });
         await payment1.save();
         const payment2 = new Payment({ ammount: 2000, name: 'Ejemplo de Egreso', isMonthly: false, date: new Date(), isIncome: false });
         await payment2.save();
